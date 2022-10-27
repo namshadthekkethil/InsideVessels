@@ -14,13 +14,16 @@ InsideVess::~InsideVess() {}
 void InsideVess::read_vessel_data() {
 
   ifstream file_tree;
-  file_tree.open("updated_vessels_Lee_data.dat");
+  //file_tree.open("updated_vessels_Lee_data.dat");
+  file_tree.open("updated_vessels_Lee_data_term_rad.dat");
+
+  double dummy1=0.0;
 
   int vess_counter = 0;
   while (!file_tree.eof()) {
     file_tree >> vess_i.x1 >> vess_i.y1 >> vess_i.z1 >> vess_i.x2 >>
         vess_i.y2 >> vess_i.z2 >> vess_i.l >> vess_i.r1 >> vess_i.r2 >>
-        vess_i.r >> vess_i.p >> vess_i.dl >> vess_i.dr;
+        vess_i.r >> vess_i.p >> vess_i.dl >> vess_i.dr>>dummy1;
 
     if (file_tree.eof())
       break;
@@ -155,7 +158,9 @@ void InsideVess::inside_elements(Mesh &mesh, double xl, double yl, double zl,
 
 void InsideVess::writeData() {
   ofstream file_vess;
-  file_vess.open("updated_vessels_Lee_inside_mod.csv", ios::out);
+  //file_vess.open("updated_vessels_Lee_inside_mod.csv", ios::out);
+  file_vess.open("updated_vessels_Lee_data_term_rad_mod.csv", ios::out);
+  
   file_vess << "\"x1\""
             << ",\"y1\""
             << ",\"z1\""
@@ -193,7 +198,8 @@ void InsideVess::writeData() {
   file_vess.close();
 
   ofstream file_vess_dat;
-  file_vess_dat.open("updated_vessels_Lee_inside_data_mod.dat", ios::out);
+  //file_vess_dat.open("updated_vessels_Lee_inside_data_mod.dat", ios::out);
+  file_vess_dat.open("updated_vessels_Lee_data_term_rad_mod.dat", ios::out);
 
   for (int i = 0; i < vessels.size(); i++) {
     double x1_vess = vessels[i].x1;
